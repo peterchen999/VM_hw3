@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-server-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server-pod
+      env: prod
+  template:
+    metadata:
+      labels:
+        app: server-pod
+        env: prod
+    spec:
+      containers:
+      - name: server-pod
+        image: peterchen999/server_111065548:1.0.3
+        imagePullPolicy: Never
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi        
+        ports:
+        - containerPort: 8888
