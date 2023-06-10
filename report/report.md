@@ -110,3 +110,28 @@
     ```
     we should see a **hello1.txt** in it
     ![minikube-hello1](./image/Q4_minikube_hello1.png)
+
+# Q5 Please explain the “Deployment”, “Service” and “Pod”.
+### Pod
+A pod is a group of one or more containers with shared storage and network resources. Also, each pod contains the specification of how it should be run. It is the smallest logical unit to be deployed. A Pod contains the things that runs on the same machine before containers are invented.
+
+### Deployment
+A deployment provides managements to several pods. This includes version control, rolling update, automatic replica management and more. 
+
+### Service
+A service is a method to expose a network application running on the pods. When using deployment, the pods may be created and destroyed, and it's hard to configure their network one by one. Therefore, a service lets user easily manage the network of pods.
+
+# Q6 What is kubernetes? why do we need it?
+Kubernetes is a container management system to help manage large scale container deployment. It is originally developed by Google and became an open-source project. In modern days, developers might deliver new features to web services frequently, therefore, we need a system to help manage those updates. Also, sometimes servers might crash, we need a system to help keeping the overall running replicas. These are the reason why we need kubernetes.
+
+# Q7 Why container technology is widely used in cloud computing environments?
+In cloud computing environments, usually we prefer horizontal scaling, buying more servers and let each server provide service to customers. Each physical machine may have different specifications, the easiest way is to use VM or container to create an environment for the applications to run in. However, VM have larger overhead, when the scale is large, the overhead becomes expensive. Although containers can't provide smooth migrations similar to VM, usually the container doesn't contain "states" in it, therefore it is acceptable for containers to crash without migration. This is the reason why container is widely used in cloud computing.
+
+# Q8 Why k8s use pod to manipulate the application instead of the container?
+A pod is similar to a "physical server" before containers were invented. Since we can run several containers (process) on a single pod (machine), it's more reasonable to create a new entity (the pod) as the smallest logic, rather than adding new fields onto the containers in the pod. This way, we can use docker container, rkt container or even Virtlet VMs in k8s by putting them in a pod. This provides good forward-compatibility. 
+
+# Q9 Explain what is PV and PVC in k8s?
+PV (PersistentVolume) is a piece of storage in the cluster that is provisioned by an admin. It is a type of resource used for storing persistant data by pods. Its lifecycle is independent of the pods that are using it. 
+
+PVC (PersistentVolumeClaim) is a request for storage. PVC consumes PV resources. Each claim can request the size and access mode of the PV storage. By separating the PV and PVC, a user issuing  PVC doesn't need to know how the storage (PV) is implemented.
+
